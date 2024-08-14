@@ -70,6 +70,15 @@ for i in range(7):
     row = row + 1
 # iloc is integer position-based, so you have to specify rows and columns by their integer position values (0-based integer position)
     
+df2 = pd.concat([df['name'],df['description'],cat.loc[:,"2-Channel Amps":]],axis=1) # creating new dataframe which contains name of product,description and categories it belong to
+
+bar_plot = pd.DataFrame()
+bar_plot['category'] = df2.columns[2:] # column name, which are categories
+bar_plot['count'] = df2.iloc[:,2:].sum().values
+bar_plot.sort_values(['count'], inplace=True, ascending=False)
+bar_plot.reset_index(inplace=True, drop=True)
+
+print(bar_plot.head()) # Top 5 most occuring categories
 
 ######
 ######
